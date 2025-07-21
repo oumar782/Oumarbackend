@@ -2,14 +2,29 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/server.js",
+      "src": "server.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/api/(contact|projet|health)(.*)",
-      "dest": "/api/server.js"
+      "src": "/api/contact",
+      "methods": ["POST", "GET", "PUT", "DELETE"],
+      "dest": "/server.js"
+    },
+    {
+      "src": "/api/projet",
+      "methods": ["GET"],
+      "dest": "/server.js"
+    },
+    {
+      "src": "/api/health",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/server.js",
+      "status": 404
     }
   ]
 }
