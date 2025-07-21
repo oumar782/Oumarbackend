@@ -10,7 +10,7 @@ const app = express();
 
 // Configuration CORS corrigée
 app.use(cors({
-  origin: 'http://localhost:5173', // Retirer le slash final
+  origin: 'https://oumar-diane.vercel.app/', // Retirer le slash final
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
