@@ -8,33 +8,31 @@ dotenv.config();
 
 const app = express();
 
-// Configuration CORS corrigée
 app.use(cors({
-  origin: 'https://oumar-diane.vercel.app/', // Retirer le slash final
+  origin: 'https://oumar-diane.vercel.app', // ← Slash final retiré
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
+
 app.use(express.json());
 
-// Logging amélioré
+// Middleware pour logger les requêtes
 app.use((req, res, next) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
   next();
 });
 
-// Routes avec gestion d'erreur
+// Routes API
 app.use('/api/contact', contactRouter);
 app.use('/api/projet', projetRouter);
 
-// Health check étendu
+// Health Check
 app.get('/api/health', (req, res) => {
-  res.status(200).json({
-    status: 'healthy',
-    timestamp: new Date().toISOString(),
-    version: '1.0.0',
-    environment: process.env.NODE_ENV || 'development',
-    database: 'connected' // À adapter selon votre base de données
+  res.status(200).json({ 
+    status: 'OK',
+    uptime: process.uptime()
   });
 });
 
