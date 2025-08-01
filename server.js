@@ -8,10 +8,10 @@ dotenv.config();
 
 const app = express();
 
-// ✅ CORS bien configuré
+// ✅ CORS bien configuré (corrigé)
 app.use(
   cors({
-    origin: [-
+    origin: [
       "http://localhost:5173",
       "https://oumar-diane.vercel.app",
       "https://backendjournee.vercel.app"
